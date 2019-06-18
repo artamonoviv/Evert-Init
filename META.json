@@ -57,6 +57,17 @@
       }
    },
    "release_status" : "unstable",
+   "resources" : {
+      "bugtracker" : {
+         "web" : "https://github.com/artamonoviv/Evert-Init/issues"
+      },
+      "homepage" : "https://github.com/artamonoviv/Evert-Init",
+      "repository" : {
+         "type" : "git",
+         "url" : "git://github.com/artamonoviv/Evert-Init.git",
+         "web" : "https://github.com/artamonoviv/Evert-Init"
+      }
+   },
    "version" : "0.001",
    "x_contributors" : [
       "Ivan Artamonov <ivan.s.artamonov@gmail.com>"
