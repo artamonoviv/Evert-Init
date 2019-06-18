@@ -1,7 +1,7 @@
 {
-   "abstract" : "It's new $module",
+   "abstract" : "a subsystem for postpone load of modules until their events are used.",
    "author" : [
-      "Ivan Artamonov <ivan.s.artamonov@gmail.com>"
+      "Ivan Artamonov, <ivan.s.artamonov {at} gmail.com>"
    ],
    "dynamic_config" : 0,
    "generated_by" : "Minilla/v3.0.12, CPAN::Meta::Converter version 2.150010",
@@ -42,16 +42,24 @@
       },
       "runtime" : {
          "requires" : {
+            "Carp" : "1.40",
+            "Data::Dumper" : "2.161",
+            "Evert::E" : "0.002",
+            "JSON" : "2.27",
             "perl" : "5.008001"
          }
       },
       "test" : {
          "requires" : {
+            "Capture::Tiny" : "0.44",
             "Test::More" : "0.98"
          }
       }
    },
    "release_status" : "unstable",
-   "version" : "0.01",
+   "version" : "0.001",
+   "x_contributors" : [
+      "Ivan Artamonov <ivan.s.artamonov@gmail.com>"
+   ],
    "x_serialization_backend" : "JSON::PP version 2.27400"
 }

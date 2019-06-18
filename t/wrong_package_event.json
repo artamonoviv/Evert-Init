@@ -1,0 +1,6 @@
+{
+	"events":
+	{
+		"wrong_event":"t::WrongPackage::some_event"
+	}
+}

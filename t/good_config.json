@@ -1,0 +1,7 @@
+{
+	"events":
+	{
+		"filter_1":[{"name":"t::First::action_first"}],
+		"action_1":"t::Second::action_second"
+	}
+}
