@@ -139,7 +139,7 @@ done_testing();
 sub read_log
 {
     open (my $file, '<t/log.txt');
-    my $t = join '', <$file>;
+    my $t = join '', reverse <$file>;
     close ($file);
     return $t;
 }

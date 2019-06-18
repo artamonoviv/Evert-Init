@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/artamonoviv/Evert-Init.svg?branch=master)](https://travis-ci.com/artamonoviv/Evert-Init)
+
 # NAME
 
 Evert::Init -  a subsystem for postpone load of modules until their events are used.
