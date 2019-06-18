@@ -1,7 +1,8 @@
 Revision history for Perl extension Evert-Init
 
 {{$NEXT}}
-
+	- Migrate to JSON::MaybeXS
+	
 0.001 2019-06-18T09:36:42Z
 
     - original version

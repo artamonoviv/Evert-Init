@@ -2,11 +2,11 @@ package Evert::Init;
 use utf8;
 use strict;
 use warnings;
-use JSON;
+use JSON::MaybeXS ();
 use Carp ();
-use Evert::E;
+use Evert::E ();
 
-our $VERSION = '0.001';
+our $VERSION = '0.002';
 
 our $PATH="config/config.json";
 our $ST_EVENT=1;
@@ -29,7 +29,7 @@ sub init
 
 	eval
 	{
-		$config = JSON::from_json( $text );
+		$config = JSON::MaybeXS::decode_json( $text );
 	};
 
 	if ($@)
@@ -228,7 +228,7 @@ Evert::Init -  a subsystem for postpone load of modules until their events are u
 
 =head1 VERSION
 
-version 0.001
+version 0.002
 
 =head1 SYNOPSIS
 
