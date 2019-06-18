@@ -6,7 +6,7 @@ Evert::Init -  a subsystem for postpone load of modules until their events are u
 
 # VERSION
 
-version 0.002
+version 0.003
 
 # SYNOPSIS
 

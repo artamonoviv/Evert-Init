@@ -6,7 +6,7 @@ use JSON::MaybeXS ();
 use Carp ();
 use Evert::E ();
 
-our $VERSION = '0.002';
+our $VERSION = '0.003';
 
 our $PATH="config/config.json";
 our $ST_EVENT=1;
@@ -67,7 +67,7 @@ sub init
 	{
 		Carp::croak "No config section in $PATH";
 	}
-	
+
 	if ($ST_EVENT)
 	{
 		Evert::E::add_action("evert_error",\&_error_log, {priority=>1})if (!Evert::E::has_action("evert_error"));
@@ -143,8 +143,6 @@ sub _gl
 	return 1;
 }
 
-no strict 'refs';
-
 sub _postponed_event
 {
 	my $action=$_[0];
@@ -173,7 +171,7 @@ sub _postponed_event
 				}
 			}
 
-			Evert::E::add_action($action->{name}, \&$sub, {priority=>$elem->{priority}, async=>$elem->{async}, async_callback=>$async_callback, is_alone=>$elem->{is_alone}});
+			Evert::E::add_action($action->{name}, \&$sub, {priority=>$elem->{priority}, async=>$elem->{async}, async_callback=>$async_callback, is_alone=>$elem->{is_alone}}) if ($sub);
 		}
 
 		delete($postponed_events{$action->{name}});
@@ -192,8 +190,11 @@ sub _prepare_sub
 	(my $pm = $package) =~ s{::}{/}g;
 	$pm .= '.pm';
 
+	my $imported=$sub;
+
 	if (!exists($INC{$pm}))
 	{
+		_currentInc();
 		eval
 		{
 			require $pm;
@@ -201,21 +202,37 @@ sub _prepare_sub
 		};
 		if ($@)
 		{
-
+			$imported = undef;
+			my $info=$@;
 			if ($action ne 'evert_error')
 			{
-				Evert::E::do_action("evert_error", $@);
+				Evert::E::do_action("evert_error", $info);
 			}
 			else
 			{
-				_gl(undef,$@);
+				_gl(undef,$info);
 			}
 		}
 	}
 
-	*$sub = \&{$package."::$func"};
+	return $imported;
+}
 
-	return $sub;
+{
+	my $_is_inc = 0; # local cache
+
+	sub _currentInc
+	{
+		return if $_is_inc;
+		if (grep {$_ eq '.'} @INC)
+		{
+			$_is_inc = 1;
+			return;
+		}
+		push @INC, '.';
+		$_is_inc = 1;
+		return;
+	}
 }
 
 =pod
@@ -228,7 +245,7 @@ Evert::Init -  a subsystem for postpone load of modules until their events are u
 
 =head1 VERSION
 
-version 0.002
+version 0.003
 
 =head1 SYNOPSIS
 
